@@ -1,0 +1,6 @@
+# Profiled LogGP parameter models
+# These are hardware-specific and should be generated locally
+*.json
+
+# Keep directory structure
+!.gitignore
