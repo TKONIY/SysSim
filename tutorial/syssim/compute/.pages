@@ -1,0 +1,8 @@
+nav:
+  - 概览: index.md
+  - __init__.py: __init__.md
+  - compute_cost_predictor.py: compute_cost_predictor.md
+  - compute_cost_profiler.py: compute_cost_profiler.md
+  - efficiency_models.py: efficiency_models.md
+  - flop_counter.py: flop_counter.md
+  - validate_profiler.py: validate_profiler.md

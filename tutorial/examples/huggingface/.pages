@@ -1,0 +1,2 @@
+nav:
+  - train_qwen3_8b_single.py: train_qwen3_8b_single.md

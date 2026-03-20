@@ -1,0 +1,6 @@
+nav:
+  - 首页: index.md
+  - 背景知识: 00_background_knowledge.md
+  - 阅读指南: 00_reading_guide.md
+  - 核心模块: syssim
+  - 使用示例: examples

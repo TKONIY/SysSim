@@ -1,0 +1,3 @@
+nav:
+  - __init__.py: __init__.md
+  - train_gpt_multi_gpu.py: train_gpt_multi_gpu.md
