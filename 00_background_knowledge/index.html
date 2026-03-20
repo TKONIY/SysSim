@@ -1,0 +1,3832 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://TKONIY.github.io/SysSim/00_background_knowledge/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../00_reading_guide/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>背景知识 - SysSim 代码教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SysSim 代码教程" class="md-header__button md-logo" aria-label="SysSim 代码教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SysSim 代码教程
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              背景知识
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SysSim 代码教程" class="md-nav__button md-logo" aria-label="SysSim 代码教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SysSim 代码教程
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    背景知识
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    背景知识
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 什么是性能模拟？为什么 LLM 需要它？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 什么是性能模拟？为什么 LLM 需要它？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 性能模拟的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 为什么 LLM 特别需要性能模拟？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-syssim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 SysSim 的设计哲学
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 计算图与有向无环图（DAG）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 计算图与有向无环图（DAG）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 什么是计算图？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 有向无环图（DAG）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 关键路径
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-syssim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 SysSim 中的计算图
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-roofline-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Roofline 模型：计算瓶颈 vs 内存瓶颈
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Roofline 模型：计算瓶颈 vs 内存瓶颈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 直觉理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-roofline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Roofline 模型的数学表述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 算术强度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-roofline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Roofline 图示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 大小感知的峰值选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FLOP 计数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. FLOP 计数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 什么是 FLOP？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 常见算子的 FLOP 公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 FLOP 计数的意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 机器学习效率预测
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 机器学习效率预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-roofline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 为什么仅靠 Roofline 不够？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 效率因子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 特征工程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 ML 模型架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 回退机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 集合通信
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 集合通信">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 什么是集合通信？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 八种集合通信原语
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-allreduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 AllReduce 的实现：环形算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 通信 DAG 与依赖关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-loggp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. LogGP 网络模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. LogGP 网络模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 为什么需要网络性能模型？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-loggp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 LogGP 模型参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 消息传输时间公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 协议切换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 参数获取
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 设备网格与分布式训练
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 设备网格与分布式训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 为什么需要分布式训练？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 三种核心并行策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-device-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 设备网格（Device Mesh）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 网络拓扑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 最大-最小公平带宽共享
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cuda-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. CUDA Stream 与同步机制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. CUDA Stream 与同步机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-cuda-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 什么是 CUDA Stream？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 为什么要使用多个 Stream？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 跨 Stream 同步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-syssim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 SysSim 中的追踪实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-syssim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. SysSim 系统架构总览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. SysSim 系统架构总览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 整体流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 代码结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 适应新硬件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_reading_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    阅读指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../syssim/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    核心模块
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    核心模块
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    __init__.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    api.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    config.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/operator_graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    operator_graph.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/tracer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    tracer.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../syssim/compute/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算成本模块
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算成本模块
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/compute/__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    __init__.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/compute/compute_cost_predictor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    compute_cost_predictor.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/compute/compute_cost_profiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    compute_cost_profiler.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/compute/efficiency_models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    efficiency_models.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/compute/flop_counter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    flop_counter.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/compute/validate_profiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    validate_profiler.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../syssim/network/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网络通信模块
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    网络通信模块
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    __init__.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/collectives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    collectives.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/dag_builder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    dag_builder.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/device_mesh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    device_mesh.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/loggp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    loggp.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/model_loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    model_loader.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/profiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    profiler.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/protocol_detector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    protocol_detector.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/simulator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    simulator.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    topology.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/network/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    validation.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../syssim/integrations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    框架集成模块
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    框架集成模块
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/integrations/__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    __init__.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syssim/integrations/huggingface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    huggingface.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../examples/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    使用示例
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    使用示例
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/trace_and_print/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    trace_and_print.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HuggingFace示例
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HuggingFace示例
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/huggingface/train_qwen3_8b_single/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    train_qwen3_8b_single.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Megatron示例
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Megatron示例
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/megatron/__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    __init__.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/megatron/train_gpt_multi_gpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    train_gpt_multi_gpu.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 什么是性能模拟？为什么 LLM 需要它？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 什么是性能模拟？为什么 LLM 需要它？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 性能模拟的定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 为什么 LLM 特别需要性能模拟？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-syssim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 SysSim 的设计哲学
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 计算图与有向无环图（DAG）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 计算图与有向无环图（DAG）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 什么是计算图？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 有向无环图（DAG）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 关键路径
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-syssim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 SysSim 中的计算图
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-roofline-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Roofline 模型：计算瓶颈 vs 内存瓶颈
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Roofline 模型：计算瓶颈 vs 内存瓶颈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 直觉理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-roofline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Roofline 模型的数学表述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 算术强度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-roofline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Roofline 图示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 大小感知的峰值选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FLOP 计数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. FLOP 计数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 什么是 FLOP？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 常见算子的 FLOP 公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 FLOP 计数的意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 机器学习效率预测
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 机器学习效率预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-roofline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 为什么仅靠 Roofline 不够？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 效率因子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 特征工程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-ml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 ML 模型架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 回退机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 集合通信
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 集合通信">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 什么是集合通信？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 八种集合通信原语
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-allreduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 AllReduce 的实现：环形算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 通信 DAG 与依赖关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-loggp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. LogGP 网络模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. LogGP 网络模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 为什么需要网络性能模型？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-loggp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 LogGP 模型参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 消息传输时间公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 协议切换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 参数获取
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 设备网格与分布式训练
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 设备网格与分布式训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 为什么需要分布式训练？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 三种核心并行策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-device-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 设备网格（Device Mesh）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 网络拓扑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 最大-最小公平带宽共享
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cuda-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. CUDA Stream 与同步机制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. CUDA Stream 与同步机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-cuda-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 什么是 CUDA Stream？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 为什么要使用多个 Stream？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 跨 Stream 同步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-syssim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 SysSim 中的追踪实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-syssim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. SysSim 系统架构总览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. SysSim 系统架构总览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 整体流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 代码结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 适应新硬件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        术语表
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">背景知识<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本文档为零基础读者系统介绍 SysSim（LLM 性能模拟器）所涉及的核心概念与背景知识。阅读本文后，你将能够理解 SysSim 的设计原理及其每个子系统的工作方式。</p>
+<hr />
+<h2 id="_2">目录<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#1-什么是性能模拟为什么-llm-需要它">什么是性能模拟？为什么 LLM 需要它？</a></li>
+<li><a href="#2-计算图与有向无环图dag">计算图与有向无环图（DAG）</a></li>
+<li><a href="#3-roofline-模型计算瓶颈-vs-内存瓶颈">Roofline 模型：计算瓶颈 vs 内存瓶颈</a></li>
+<li><a href="#4-flop-计数">FLOP 计数</a></li>
+<li><a href="#5-机器学习效率预测">机器学习效率预测</a></li>
+<li><a href="#6-集合通信">集合通信</a></li>
+<li><a href="#7-loggp-网络模型">LogGP 网络模型</a></li>
+<li><a href="#8-设备网格与分布式训练">设备网格与分布式训练</a></li>
+<li><a href="#9-cuda-stream-与同步机制">CUDA Stream 与同步机制</a></li>
+<li><a href="#10-syssim-系统架构总览">SysSim 系统架构总览</a></li>
+</ol>
+<hr />
+<h2 id="1-llm">1. 什么是性能模拟？为什么 LLM 需要它？<a class="headerlink" href="#1-llm" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 性能模拟的定义<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p><strong>性能模拟</strong>（Performance Simulation）是指在<strong>不实际运行</strong>完整计算任务的前提下，通过分析模型和硬件特性来<strong>估计</strong>程序的执行时间。</p>
+<p>打一个比方：你想知道从北京开车到上海需要多长时间，但你并不需要真的开一趟。你可以根据距离、限速、路况等信息来<strong>估算</strong>总时间。性能模拟做的就是类似的事情——根据"计算量"、"内存带宽"、"网络延迟"等信息来估算神经网络训练或推理的耗时。</p>
+<h3 id="12-llm">1.2 为什么 LLM 特别需要性能模拟？<a class="headerlink" href="#12-llm" title="Permanent link">&para;</a></h3>
+<p>大语言模型（LLM）的规模极其庞大。以 GPT-3 为例，它拥有 1750 亿个参数，单次训练可能需要数千块 GPU 运行数周之久。在这种量级下，以下问题变得至关重要：</p>
+<ul>
+<li><strong>硬件选型</strong>：在购买或租用 GPU 之前，需要知道不同硬件上的预期训练时间。</li>
+<li><strong>模型架构探索</strong>：在构建新模型时，希望快速评估不同架构选择对训练效率的影响。</li>
+<li><strong>资源调度</strong>：在集群管理中，需要预估任务耗时来优化资源分配。</li>
+<li><strong>分布式策略选择</strong>：不同的并行策略（数据并行、张量并行等）会带来截然不同的性能表现，需要在实际部署前做出决策。</li>
+</ul>
+<p>如果每次评估都需要真正运行模型，代价将非常高昂。性能模拟器允许我们在<strong>几秒到几分钟内</strong>得到估算结果，而非等待数小时甚至数天。</p>
+<h3 id="13-syssim">1.3 SysSim 的设计哲学<a class="headerlink" href="#13-syssim" title="Permanent link">&para;</a></h3>
+<p>SysSim 采用<strong>混合方法</strong>：将基于物理的分析模型（Roofline）与基于机器学习的效率预测相结合。</p>
+<ul>
+<li><strong>Roofline 模型</strong>提供了基于硬件规格的理论上限——这部分是确定性的、可解释的。</li>
+<li><strong>ML 效率预测器</strong>学习实际执行中与理论值之间的偏差——捕获缓存效应、GPU 利用率、内核启动开销等难以用公式表达的因素。</li>
+</ul>
+<p>两者结合的核心公式非常简洁：</p>
+<div class="arithmatex">\[T_{\text{actual}} = \frac{T_{\text{roofline}}}{\eta}\]</div>
+<p>其中 <span class="arithmatex">\(T_{\text{roofline}}\)</span> 是分析模型给出的理论最短时间，<span class="arithmatex">\(\eta \in (0, 1]\)</span> 是 ML 模型预测的效率因子。</p>
+<hr />
+<h2 id="2-dag">2. 计算图与有向无环图（DAG）<a class="headerlink" href="#2-dag" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 什么是计算图？<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>在深度学习中，<strong>计算图</strong>（Computational Graph）是用来描述一系列数学运算之间的数据流关系的图结构。每个节点代表一个运算（如矩阵乘法、激活函数），每条边代表数据（张量）在运算之间的传递关系。</p>
+<p>举一个最简单的例子——线性层加 ReLU 激活：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入 x
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  ▼
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>┌──────────┐
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│ 矩阵乘法  │    y = W * x + b
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>└────┬─────┘
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>     ▼
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>┌──────────┐
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   ReLU   │    z = max(0, y)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>└────┬─────┘
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>     │
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>     ▼
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  输出 z
+</code></pre></div>
+<p>在这个图中，ReLU 依赖于矩阵乘法的输出。这种"先后关系"就是计算图所表达的核心信息。</p>
+<h3 id="22-dag">2.2 有向无环图（DAG）<a class="headerlink" href="#22-dag" title="Permanent link">&para;</a></h3>
+<p><strong>有向无环图</strong>（Directed Acyclic Graph, DAG）是计算图的数学形式化表述：</p>
+<ul>
+<li><strong>有向</strong>：边有方向，表示数据流动的方向（从生产者到消费者）。</li>
+<li><strong>无环</strong>：图中不存在从某个节点出发经过若干条边后又回到该节点的路径。</li>
+</ul>
+<p>DAG 的"无环"性质非常关键——它保证了计算可以按照拓扑排序的顺序执行，不会出现循环依赖。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>     A ──────► B ──────► D
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>     │                    ▲
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>     │                    │
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>     └──────► C ──────────┘
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  拓扑排序：A → B → C → D  或  A → C → B → D
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  （两种都合法，因为 B 和 C 之间没有依赖关系）
+</code></pre></div>
+<h3 id="23">2.3 关键路径<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>在 DAG 中，<strong>关键路径</strong>（Critical Path）是指从起始节点到终止节点的最长路径。它决定了整个计算图的最短完成时间——即使我们有无限的并行资源，也不可能比关键路径更快地完成所有计算。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>     A (2ms) ──► B (5ms) ──► D (1ms)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>     │                        ▲
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>     │                        │
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>     └──────► C (3ms) ────────┘
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  路径 1: A → B → D = 2 + 5 + 1 = 8ms  ← 关键路径
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  路径 2: A → C → D = 2 + 3 + 1 = 6ms
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  最短完成时间 = 8ms（由关键路径决定）
+</code></pre></div>
+<h3 id="24-syssim">2.4 SysSim 中的计算图<a class="headerlink" href="#24-syssim" title="Permanent link">&para;</a></h3>
+<p>SysSim 在追踪（Trace）PyTorch 模型执行时，会构建一个算子级别的 DAG。图中的每个节点是一个算子（Operator），拥有以下属性：</p>
+<ul>
+<li><strong>算子类型</strong>：GEMM（矩阵乘法）、ATTN（注意力）、MATH（通用数学运算）、COLLECTIVE（集合通信）、MEMORY（内存拷贝）、BARRIER（全局同步）、STREAM_SYNC（流间同步）</li>
+<li><strong>预估执行时间</strong>：通过 Roofline + ML 效率模型计算</li>
+<li><strong>依赖关系</strong>：数据依赖（谁的输出是谁的输入）和流依赖（跨 CUDA 流的同步）</li>
+</ul>
+<p>通过对这个 DAG 进行关键路径分析，SysSim 可以估计整个模型训练或推理的总耗时。</p>
+<hr />
+<h2 id="3-roofline-vs">3. Roofline 模型：计算瓶颈 vs 内存瓶颈<a class="headerlink" href="#3-roofline-vs" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 直觉理解<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>想象你在工厂的流水线上工作。流水线有两个环节：</p>
+<ol>
+<li><strong>搬运工</strong>负责把原材料搬到机器旁边（类比：内存读写）</li>
+<li><strong>机器</strong>负责加工原材料（类比：计算单元做运算）</li>
+</ol>
+<p>流水线的整体速度取决于哪个环节更慢：</p>
+<ul>
+<li>如果机器加工很快，但搬运工搬运很慢，那瓶颈在搬运——这就是<strong>内存瓶颈</strong>（memory-bound）。</li>
+<li>如果搬运工很快，但机器加工很慢，那瓶颈在加工——这就是<strong>计算瓶颈</strong>（compute-bound）。</li>
+</ul>
+<h3 id="32-roofline">3.2 Roofline 模型的数学表述<a class="headerlink" href="#32-roofline" title="Permanent link">&para;</a></h3>
+<p>Roofline 模型为每个算子计算两个时间约束：</p>
+<p><strong>计算约束</strong>（Compute Constraint）：</p>
+<div class="arithmatex">\[T_{\text{compute}} = \frac{\text{FLOPs}}{\text{Peak FLOP/s}}\]</div>
+<p>这表示：即使数据瞬间就位，纯粹的计算也需要这么长时间。</p>
+<p><strong>内存约束</strong>（Memory Constraint）：</p>
+<div class="arithmatex">\[T_{\text{memory}} = \frac{\text{Bytes}}{\text{Peak Bandwidth}}\]</div>
+<p>这表示：即使计算瞬间完成，光是读写数据也需要这么长时间。</p>
+<p><strong>Roofline 预估时间</strong>：</p>
+<div class="arithmatex">\[T_{\text{roofline}} = \max(T_{\text{compute}},\ T_{\text{memory}})\]</div>
+<p>取两者的最大值，因为一个算子的执行时间至少受限于更慢的那个因素。</p>
+<h3 id="33">3.3 算术强度<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p><strong>算术强度</strong>（Arithmetic Intensity）是判断一个算子是计算瓶颈还是内存瓶颈的关键指标：</p>
+<div class="arithmatex">\[\text{Arithmetic Intensity} = \frac{\text{FLOPs}}{\text{Bytes}}\]</div>
+<p>单位是 FLOP/Byte，表示每传输一个字节需要做多少次浮点运算。</p>
+<ul>
+<li>算术强度<strong>高</strong>的运算（如大矩阵乘法）通常是<strong>计算瓶颈</strong>：数据量相对少，但计算量大。</li>
+<li>算术强度<strong>低</strong>的运算（如逐元素加法、LayerNorm）通常是<strong>内存瓶颈</strong>：计算简单，但需要读写大量数据。</li>
+</ul>
+<h3 id="34-roofline">3.4 Roofline 图示<a class="headerlink" href="#34-roofline" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>性能
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>(FLOP/s)
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  │
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  │          ┌──────────────────── Peak Compute（计算天花板）
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  │         ╱
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  │        ╱
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  │       ╱
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  │      ╱    ← 这条斜线的斜率 = Peak Bandwidth
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  │     ╱
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  │    ╱
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>  │   ╱
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  │  ╱
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>  │ ╱
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>  │╱
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>  └──────────────────────────────────────►
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>                 算术强度 (FLOP/Byte)
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>       ◄── 内存瓶颈区域 ──►◄── 计算瓶颈区域 ──►
+</code></pre></div>
+<p>在"屋顶"的拐角点左侧，性能受限于内存带宽（斜线部分）；在拐角点右侧，性能受限于计算峰值（水平部分）。</p>
+<h3 id="35">3.5 大小感知的峰值选择<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
+<p>GPU 的实际峰值性能因算子规模而异：</p>
+<ul>
+<li><strong>大规模运算</strong>（所有维度 <span class="arithmatex">\(\geq 512\)</span>）：使用峰值张量单元吞吐量。GPU 利用率高，内核启动开销可被摊销。</li>
+<li><strong>小规模运算</strong>（任意维度 <span class="arithmatex">\(&lt; 512\)</span>）：使用保守峰值。GPU 并行度不足，内核启动开销（约 7 微秒）占比显著。</li>
+</ul>
+<p>这是 SysSim 对标准 Roofline 模型的一个实用改进。</p>
+<hr />
+<h2 id="4-flop">4. FLOP 计数<a class="headerlink" href="#4-flop" title="Permanent link">&para;</a></h2>
+<h3 id="41-flop">4.1 什么是 FLOP？<a class="headerlink" href="#41-flop" title="Permanent link">&para;</a></h3>
+<p><strong>FLOP</strong>（Floating Point Operation）即"浮点运算次数"。它是衡量一个计算任务"计算量大小"的基本单位。</p>
+<ul>
+<li>一次加法 = 1 FLOP</li>
+<li>一次乘法 = 1 FLOP</li>
+<li>一次乘加运算（Multiply-Accumulate, MAC）= 2 FLOPs（一次乘法 + 一次加法）</li>
+</ul>
+<p>注意区分：
+- <strong>FLOP</strong>（单数）：浮点运算次数（数量）
+- <strong>FLOP/s</strong>（FLOPs per second）：每秒浮点运算次数（速率），用于衡量硬件性能</p>
+<h3 id="42-flop">4.2 常见算子的 FLOP 公式<a class="headerlink" href="#42-flop" title="Permanent link">&para;</a></h3>
+<p><strong>矩阵乘法</strong> <span class="arithmatex">\(C = A \times B\)</span>，其中 <span class="arithmatex">\(A\)</span> 的形状为 <span class="arithmatex">\(M \times K\)</span>，<span class="arithmatex">\(B\)</span> 的形状为 <span class="arithmatex">\(K \times N\)</span>：</p>
+<div class="arithmatex">\[\text{FLOPs} = 2 \times M \times N \times K\]</div>
+<p>因子 2 来源于每个输出元素需要 <span class="arithmatex">\(K\)</span> 次乘法和 <span class="arithmatex">\(K-1\)</span> 次加法（近似为 <span class="arithmatex">\(2K\)</span> 次运算），共有 <span class="arithmatex">\(M \times N\)</span> 个输出元素。</p>
+<p><strong>注意力机制</strong>（Scaled Dot-Product Attention），给定 batch size <span class="arithmatex">\(B\)</span>、注意力头数 <span class="arithmatex">\(H\)</span>、序列长度 <span class="arithmatex">\(S\)</span>、头维度 <span class="arithmatex">\(D\)</span>：</p>
+<div class="arithmatex">\[\text{FLOPs} \approx 2 \times B \times H \times S^2 \times D\]</div>
+<p>注意力的计算量与序列长度的<strong>平方</strong>成正比，这也是为什么长序列处理在 LLM 中尤其昂贵的原因。</p>
+<p><strong>逐元素运算</strong>（如 ReLU、加法）：</p>
+<div class="arithmatex">\[\text{FLOPs} = \text{元素总数}\]</div>
+<p>每个元素做一次运算。</p>
+<p><strong>归一化运算</strong>（如 LayerNorm）：</p>
+<div class="arithmatex">\[\text{FLOPs} \approx 5 \times \text{元素总数}\]</div>
+<p>包含求均值、求方差、归一化、缩放和偏移等步骤。</p>
+<h3 id="43-flop">4.3 FLOP 计数的意义<a class="headerlink" href="#43-flop" title="Permanent link">&para;</a></h3>
+<p>FLOP 计数是 Roofline 模型中计算约束 <span class="arithmatex">\(T_{\text{compute}}\)</span> 的核心输入。准确的 FLOP 计数直接影响性能估计的准确性。</p>
+<p>SysSim 为每种算子类型维护了一个 FLOP 计数注册表（Registry），确保对 PyTorch 中各类运算的 FLOP 计数是准确且一致的。</p>
+<hr />
+<h2 id="5">5. 机器学习效率预测<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="51-roofline">5.1 为什么仅靠 Roofline 不够？<a class="headerlink" href="#51-roofline" title="Permanent link">&para;</a></h3>
+<p>Roofline 模型给出的是<strong>理论性能上限</strong>——假设 GPU 的每个计算单元和内存通道都在满负荷工作。但现实中，GPU 的实际性能往往远低于理论峰值，原因包括：</p>
+<ul>
+<li><strong>GPU 核心利用率不足</strong>：小规模运算无法充分利用所有计算核心。</li>
+<li><strong>缓存命中率</strong>：数据访问模式影响 L1/L2 缓存的命中率。</li>
+<li><strong>内核启动开销</strong>：每次启动一个 GPU 内核都有固定的开销（约数微秒）。</li>
+<li><strong>线程束（Warp）调度效率</strong>：GPU 的线程调度机制并非总是最优的。</li>
+</ul>
+<p>这些因素使得纯 Roofline 预测往往<strong>过于乐观</strong>。</p>
+<h3 id="52">5.2 效率因子<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p>SysSim 定义<strong>效率因子</strong> <span class="arithmatex">\(\eta\)</span> 来表示实际性能与理论峰值之间的比率：</p>
+<div class="arithmatex">\[\eta = \frac{T_{\text{roofline}}}{T_{\text{measured}}} \in (0, 1]\]</div>
+<ul>
+<li><span class="arithmatex">\(\eta = 1.0\)</span>：完美效率，实际时间等于 Roofline 时间。</li>
+<li><span class="arithmatex">\(\eta = 0.5\)</span>：50% 效率，实际时间是 Roofline 时间的 2 倍。</li>
+<li><span class="arithmatex">\(\eta = 0.1\)</span>：10% 效率，实际时间是 Roofline 时间的 10 倍（常见于非常小的运算）。</li>
+</ul>
+<p>效率通常与运算规模正相关：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>效率 η
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>1.0 ┤
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    │                              ●●●●●●●●
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    │                         ●●●●
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>0.5 ┤                    ●●●●
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    │              ●●●●●
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    │         ●●●●
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    │    ●●●●
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>0.1 ┤●●●
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    │
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>0.0 ┤
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    └──────────────────────────────────────►
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>          小运算                     大运算
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>              运算规模（矩阵维度等）
+</code></pre></div>
+<h3 id="53">5.3 特征工程<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p>ML 效率预测器不直接使用原始参数，而是精心设计的特征组合：</p>
+<p><strong>基础特征</strong>（对数缩放的维度信息）：
+- 矩阵乘法：M、N、K 维度、纵横比、极值
+- 注意力：batch、heads、序列长度、头维度
+- 数学运算：batch、隐藏层大小、总元素数</p>
+<p><strong>Roofline 包络特征</strong>（瓶颈特性）：
+- 各约束时间（对数缩放）
+- 约束比率（距离瓶颈的远近）
+- 主导约束（独热编码：是计算瓶颈还是内存瓶颈）</p>
+<p><strong>硬件描述特征</strong>：
+- 容量比率（架构特征）
+- 绝对容量（规模信息）</p>
+<p>将 Roofline 的分析结果作为 ML 模型的输入特征，是 SysSim 混合方法的关键设计——它让 ML 模型了解到当前运算处于什么样的硬件约束环境中。</p>
+<h3 id="54-ml">5.4 ML 模型架构<a class="headerlink" href="#54-ml" title="Permanent link">&para;</a></h3>
+<p>SysSim 支持两种 ML 后端：</p>
+<p><strong>MLP（多层感知机）</strong>：
+- 4 个隐藏层，带批归一化
+- Dropout 正则化
+- Sigmoid 输出层（将预测约束在 <span class="arithmatex">\((0, 1]\)</span> 范围内）</p>
+<p><strong>XGBoost（梯度提升树）</strong>：
+- 基于直方图的树构建
+- L1/L2 正则化、子采样
+- 早停机制</p>
+<p>两种模型都是<strong>硬件特定</strong>的——在 A100 上训练的效率模型不能直接用于 H100，因为不同 GPU 架构的缓存大小、SM 数量、调度特性等均不同。</p>
+<h3 id="55">5.5 回退机制<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
+<p>当 ML 模型不可用时，SysSim 优雅地降级为纯 Roofline 估计（<span class="arithmatex">\(\eta = 1.0\)</span>）。这提供了保守但可解释的预测结果。</p>
+<hr />
+<h2 id="6">6. 集合通信<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 什么是集合通信？<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>在分布式训练中，多块 GPU 需要互相交换数据。<strong>集合通信</strong>（Collective Communication）是指一组预定义的通信模式，它们描述了多个参与者之间如何协调地发送和接收数据。</p>
+<p>可以类比课堂场景：
+- <strong>Broadcast（广播）</strong>：老师向全班同学宣布一件事——一对多通信
+- <strong>Reduce（归约）</strong>：全班同学报出自己的成绩，老师算出平均分——多对一汇总
+- <strong>AllReduce（全归约）</strong>：全班同学的成绩汇总后，每个同学都得到平均分——多对多汇总
+- <strong>AllGather（全收集）</strong>：每个同学写下一段话，最后每个同学都拿到所有人的完整文集</p>
+<h3 id="62">6.2 八种集合通信原语<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p>SysSim 支持以下八种集合通信操作：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>┌────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>│  操作名称        描述                    数据流                │
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>├────────────────────────────────────────────────────────────────┤
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>│  AllReduce      全部归约后分发给所有人    全部 → 归约 → 全部   │
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>│  Broadcast      从一个根节点分发给所有人  一个 → 全部          │
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>│  Reduce         全部归约后汇总到一个人    全部 → 一个          │
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>│  AllGather      收集所有人的数据给所有人  全部 → 全部（拼接）  │
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>│  ReduceScatter  归约后将结果分散给各人    全部 → 归约 → 分散   │
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>│  AllToAll       每人给每人不同的数据      全部 ↔ 全部          │
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>│  Scatter        从一个人分发给所有人      一个 → 分散          │
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>│  Gather         从所有人收集到一个人      全部 → 一个（拼接）  │
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>└────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="63-allreduce">6.3 AllReduce 的实现：环形算法<a class="headerlink" href="#63-allreduce" title="Permanent link">&para;</a></h3>
+<p>AllReduce 是分布式训练中最常用的通信操作（梯度同步），SysSim 使用<strong>环形算法</strong>（Ring Algorithm）实现它，分两步完成：</p>
+<p><strong>步骤 1：ReduceScatter（归约-分散）</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>初始状态（4 块 GPU，每块持有完整梯度向量的一部分用于归约）：
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>GPU 0: [A0] [A1] [A2] [A3]
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>GPU 1: [B0] [B1] [B2] [B3]
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>GPU 2: [C0] [C1] [C2] [C3]
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>GPU 3: [D0] [D1] [D2] [D3]
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>经过 3 轮环形传递和累加后：
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>GPU 0: [ABCD_0] [    ] [      ] [      ]
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>GPU 1: [      ] [ABCD_1] [    ] [      ]
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>GPU 2: [      ] [      ] [ABCD_2] [    ]
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>GPU 3: [      ] [      ] [      ] [ABCD_3]
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>每块 GPU 持有归约结果的 1/4。
+</code></pre></div>
+<p><strong>步骤 2：AllGather（全收集）</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>再经过 3 轮环形传递后，每块 GPU 都拥有完整的归约结果：
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>GPU 0: [ABCD_0] [ABCD_1] [ABCD_2] [ABCD_3]
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>GPU 1: [ABCD_0] [ABCD_1] [ABCD_2] [ABCD_3]
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>GPU 2: [ABCD_0] [ABCD_1] [ABCD_2] [ABCD_3]
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>GPU 3: [ABCD_0] [ABCD_1] [ABCD_2] [ABCD_3]
+</code></pre></div>
+<p>环形算法的优势在于：每块 GPU 在任一时刻只与左右邻居通信，<strong>带宽利用率最优</strong>。</p>
+<h3 id="64-dag">6.4 通信 DAG 与依赖关系<a class="headerlink" href="#64-dag" title="Permanent link">&para;</a></h3>
+<p>SysSim 将每个集合通信操作分解为一系列<strong>点对点消息</strong>，并自动推断依赖关系：</p>
+<ul>
+<li><strong>规则 1</strong>：同一发送者的消息是顺序的（一个发送者不能同时发两条消息）</li>
+<li><strong>规则 2</strong>：同一接收者的消息是顺序的（一个接收者不能同时接收两条消息）</li>
+<li>无依赖的操作可以<strong>并行</strong>执行</li>
+</ul>
+<hr />
+<h2 id="7-loggp">7. LogGP 网络模型<a class="headerlink" href="#7-loggp" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 为什么需要网络性能模型？<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>在分布式训练中，GPU 之间的通信时间可能占总训练时间的很大比例。为了准确模拟整体性能，我们需要一个能够估算点对点消息传输时间的模型。</p>
+<h3 id="72-loggp">7.2 LogGP 模型参数<a class="headerlink" href="#72-loggp" title="Permanent link">&para;</a></h3>
+<p>LogGP 是一种广泛使用的<strong>并行通信性能模型</strong>，使用四个参数描述网络特性：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(L\)</span></td>
+<td>Latency（延迟）</td>
+<td>消息从发送端到接收端的单程传播延迟（秒）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(o\)</span></td>
+<td>Overhead（开销）</td>
+<td>每条消息在 CPU 端的处理时间（秒）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(g\)</span></td>
+<td>Gap per message（消息间隔）</td>
+<td>连续两条消息之间的最小时间间隔（秒）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(G\)</span></td>
+<td>Gap per byte（字节间隔）</td>
+<td>每字节的传输时间（秒/字节），即带宽的倒数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="73">7.3 消息传输时间公式<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<p>一条大小为 <span class="arithmatex">\(m\)</span> 字节的消息的传输时间为：</p>
+<div class="arithmatex">\[T(m) = L + 2o + (m - 1) \times G\]</div>
+<p>其中：
+- <span class="arithmatex">\(L\)</span> 是网络延迟
+- <span class="arithmatex">\(2o\)</span> 是发送端和接收端各一次 CPU 处理开销
+- <span class="arithmatex">\((m-1) \times G\)</span> 是数据传输时间</p>
+<p>对于小消息，<span class="arithmatex">\(L\)</span> 和 <span class="arithmatex">\(o\)</span> 主导；对于大消息，<span class="arithmatex">\(G \times m\)</span> 主导。</p>
+<h3 id="74">7.4 协议切换<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
+<p>现代网络协议通常有两种模式：</p>
+<ul>
+<li><strong>Eager 协议</strong>（小消息）：发送端直接发送，无需事先握手。延迟低但占用接收端缓冲区。</li>
+<li><strong>Rendezvous 协议</strong>（大消息）：发送端先通知接收端"准备好了吗？"，收到确认后才发送。增加了一个往返延迟，但内存使用更可控。</li>
+</ul>
+<p>SysSim 的 LogGP 参数加载器支持根据消息大小自动选择对应的协议参数。</p>
+<h3 id="75">7.5 参数获取<a class="headerlink" href="#75" title="Permanent link">&para;</a></h3>
+<p>LogGP 参数通过<strong>乒乓微基准测试</strong>（Ping-Pong Microbenchmark）获得：在两个节点之间反复发送不同大小的消息，测量往返时间（RTT），然后通过最小二乘拟合提取 <span class="arithmatex">\(L\)</span>、<span class="arithmatex">\(o\)</span>、<span class="arithmatex">\(g\)</span>、<span class="arithmatex">\(G\)</span> 参数。</p>
+<hr />
+<h2 id="8">8. 设备网格与分布式训练<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="81">8.1 为什么需要分布式训练？<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<p>现代 LLM 的规模已经远超单块 GPU 的内存容量。例如，一个 70B 参数的模型仅存储参数就需要约 140 GB（FP16），而当前最大的单 GPU 内存也只有 80-96 GB。因此，<strong>分布式训练</strong>（Distributed Training）——使用多块 GPU 协同训练——是必不可少的。</p>
+<h3 id="82">8.2 三种核心并行策略<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<p><strong>数据并行（Data Parallelism, DP）</strong></p>
+<p>每块 GPU 持有完整的模型副本，但处理不同的数据批次。训练后通过 AllReduce 同步梯度。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>           数据批次
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>      ┌────┬────┬────┬────┐
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>      │ D0 │ D1 │ D2 │ D3 │
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>      └──┬─┴──┬─┴──┬─┴──┬─┘
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>         ▼    ▼    ▼    ▼
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>      ┌────┐┌────┐┌────┐┌────┐
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>      │GPU0││GPU1││GPU2││GPU3│  每块 GPU 有完整模型
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>      │模型││模型││模型││模型│  处理不同数据
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>      └──┬─┘└──┬─┘└──┬─┘└──┬─┘
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>         │    │    │    │
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>         └────┴────┴────┘
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>              AllReduce           同步梯度
+</code></pre></div>
+<p>优点：实现简单，通信量与模型大小成正比（与 GPU 数量无关）。
+缺点：每块 GPU 必须能容纳完整模型。</p>
+<p><strong>张量并行（Tensor Parallelism, TP）</strong></p>
+<p>将单个算子（如矩阵乘法）的计算<strong>切分</strong>到多块 GPU 上。每块 GPU 只持有权重矩阵的一部分。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>  完整权重矩阵 W (大小 M×N):
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  ┌──────────────────────────────┐
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  │            W                 │
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  │         M × N                │
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  └──────────────────────────────┘
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>              │
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    按列切分为 4 份
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>              │
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  ┌──────┐┌──────┐┌──────┐┌──────┐
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>  │ W_0  ││ W_1  ││ W_2  ││ W_3  │
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>  │M×N/4 ││M×N/4 ││M×N/4 ││M×N/4 │
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>  │GPU 0 ││GPU 1 ││GPU 2 ││GPU 3 │
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>  └──────┘└──────┘└──────┘└──────┘
+</code></pre></div>
+<p>优点：可以训练超大模型（单 GPU 内存不足时）。
+缺点：每层计算后需要 AllReduce 或 AllGather 通信，要求 GPU 之间有<strong>高带宽互联</strong>（如 NVLink）。</p>
+<p><strong>流水线并行（Pipeline Parallelism, PP）</strong></p>
+<p>将模型的不同<strong>层</strong>分配到不同的 GPU 上，数据像流水线一样依次流过各 GPU。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  GPU 0      GPU 1      GPU 2      GPU 3
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  ┌─────┐   ┌─────┐   ┌─────┐   ┌─────┐
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  │第1-6│──►│第7-12│──►│13-18│──►│19-24│
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  │  层  │   │  层  │   │  层  │   │  层  │
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  └─────┘   └─────┘   └─────┘   └─────┘
+</code></pre></div>
+<p>优点：通信量小（只在层间传递激活值）。
+缺点：存在"流水线气泡"——部分 GPU 在等待数据时空闲。</p>
+<h3 id="83-device-mesh">8.3 设备网格（Device Mesh）<a class="headerlink" href="#83-device-mesh" title="Permanent link">&para;</a></h3>
+<p><strong>设备网格</strong>是一种将多块 GPU 组织成多维逻辑阵列的抽象。每个维度对应一种并行策略。</p>
+<p>例如，16 块 GPU 排列为 <span class="arithmatex">\(4 \times 4\)</span> 的二维网格：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>             GPU 维度（张量并行）
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>            0    1    2    3
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>          ┌────┬────┬────┬────┐
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  节点 0  │ G0 │ G1 │ G2 │ G3 │
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  维度    ├────┼────┼────┼────┤
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> （数据  1│ G4 │ G5 │ G6 │ G7 │
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  并行）  ├────┼────┼────┼────┤
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        2 │ G8 │ G9 │G10 │G11 │
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>          ├────┼────┼────┼────┤
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>        3 │G12 │G13 │G14 │G15 │
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>          └────┴────┴────┴────┘
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>  同一行内（如 G0, G1, G2, G3）：张量并行组，通过 NVLink 通信
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>  同一列内（如 G0, G4, G8, G12）：数据并行组，通过 InfiniBand 通信
+</code></pre></div>
+<h3 id="84">8.4 网络拓扑<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
+<p>不同维度的 GPU 之间通常使用不同的互联技术：</p>
+<p><strong>NVLink Mesh</strong>（节点内，同一台机器的 GPU 之间）：
+- 带宽极高（例如 900 GB/s）
+- 延迟极低
+- 适合张量并行等高频通信</p>
+<p><strong>InfiniBand / Slingshot</strong>（节点间，不同机器之间）：
+- 带宽相对较低（例如 25-100 GB/s）
+- 延迟较高
+- 适合数据并行等通信量较大但频率较低的场景</p>
+<p>SysSim 支持五种拓扑模型：</p>
+<table>
+<thead>
+<tr>
+<th>拓扑</th>
+<th>描述</th>
+<th>典型应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FullyConnected</td>
+<td>每对节点有专用链路</td>
+<td>理论基准</td>
+</tr>
+<tr>
+<td>Ring</td>
+<td>双向环形</td>
+<td>环形 AllReduce</td>
+</tr>
+<tr>
+<td>Switch</td>
+<td>星形，共享交换机</td>
+<td>简单集群</td>
+</tr>
+<tr>
+<td>NVLinkMesh</td>
+<td>全连接 NVLink 网格</td>
+<td>节点内 GPU</td>
+</tr>
+<tr>
+<td>Hierarchical</td>
+<td>多层（NVLink + InfiniBand）</td>
+<td>生产集群</td>
+</tr>
+</tbody>
+</table>
+<h3 id="85-">8.5 最大-最小公平带宽共享<a class="headerlink" href="#85-" title="Permanent link">&para;</a></h3>
+<p>当多个通信操作同时使用同一网络资源时，SysSim 使用<strong>最大-最小公平</strong>（Max-Min Fairness）算法分配带宽：</p>
+<div class="arithmatex">\[\text{bandwidth}_i = \min_{r \in \text{path}_i} \frac{\text{bandwidth}_r}{\text{num\_ops\_sharing}_r}\]</div>
+<p>即每个操作获得其路径上最拥挤资源的公平份额。这自然地模拟了网络拥塞。</p>
+<hr />
+<h2 id="9-cuda-stream">9. CUDA Stream 与同步机制<a class="headerlink" href="#9-cuda-stream" title="Permanent link">&para;</a></h2>
+<h3 id="91-cuda-stream">9.1 什么是 CUDA Stream？<a class="headerlink" href="#91-cuda-stream" title="Permanent link">&para;</a></h3>
+<p><strong>CUDA Stream</strong> 是 GPU 上的一个<strong>任务队列</strong>。提交到同一个 Stream 的操作按顺序执行，但不同 Stream 上的操作可以<strong>并行</strong>执行。</p>
+<p>可以类比超市收银：
+- 每条收银通道是一个 Stream
+- 同一通道的顾客按顺序结账
+- 不同通道的顾客同时结账</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Stream 0:  ████ Op A ████ ──── ████ Op C ████
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Stream 1:       ████ Op B ████ ──── ████ Op D ████
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>时间 ──────────────────────────────────────────►
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>Op A 和 Op B 可以并行执行（不同 Stream）
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>Op C 必须等 Op A 完成（同一 Stream）
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>Op D 必须等 Op B 完成（同一 Stream）
+</code></pre></div>
+<h3 id="92-stream">9.2 为什么要使用多个 Stream？<a class="headerlink" href="#92-stream" title="Permanent link">&para;</a></h3>
+<p>在 LLM 训练中，许多操作之间没有数据依赖关系，可以并行执行：</p>
+<ul>
+<li><strong>计算与通信重叠</strong>：当 GPU 在进行第 N 层的反向传播计算时，可以同时在另一个 Stream 上传输第 N+1 层的梯度。</li>
+<li><strong>多算子并行</strong>：独立的数学运算可以分配到不同 Stream 并行执行。</li>
+</ul>
+<h3 id="93-stream">9.3 跨 Stream 同步<a class="headerlink" href="#93-stream" title="Permanent link">&para;</a></h3>
+<p>当一个 Stream 的操作依赖于另一个 Stream 的结果时，需要<strong>同步</strong>。CUDA 提供了 <strong>Event</strong> 机制：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Stream 0:  ████ Op A ████ ─── record(Event) ───── ████ Op C ████
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>                                    │
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>                                    ▼
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Stream 1:  ──── wait(Event) ─── ████ Op B ████
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>Op B 需要等待 Op A 完成（通过 Event 同步）
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>Op C 不受影响，继续在 Stream 0 上按序执行
+</code></pre></div>
+<p>SysSim 通过以下两种机制追踪这些同步关系：</p>
+<ul>
+<li><strong>BARRIER（栅障）</strong>：等待<strong>所有</strong> Stream 上的操作完成（全局同步点）</li>
+<li><strong>STREAM_SYNC（流同步）</strong>：只等待<strong>特定</strong> Stream 上的操作完成（定向同步）</li>
+</ul>
+<h3 id="94-syssim">9.4 SysSim 中的追踪实现<a class="headerlink" href="#94-syssim" title="Permanent link">&para;</a></h3>
+<p>SysSim 通过拦截 PyTorch 的分发机制来追踪 Stream 操作：</p>
+<ul>
+<li><strong>TensorStorageTracker</strong>：跟踪张量的存储指针，建立"谁产生了这个张量"的映射，从而推断数据依赖。</li>
+<li><strong>CUDAEventTracker</strong>：通过猴子补丁（Monkey Patching）拦截 <code>Event.record()</code> 和 <code>Event.wait()</code> 调用，捕获跨 Stream 的同步关系。</li>
+</ul>
+<hr />
+<h2 id="10-syssim">10. SysSim 系统架构总览<a class="headerlink" href="#10-syssim" title="Permanent link">&para;</a></h2>
+<h3 id="101">10.1 整体流程<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>┌──────────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>│                         用户输入                                     │
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>│  ┌──────────────┐  ┌───────────────┐  ┌────────────────────────┐    │
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>│  │ PyTorch 模型  │  │  示例输入数据  │  │  硬件配置 (HardwareInfo)│    │
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>│  └──────┬───────┘  └───────┬───────┘  └────────────┬───────────┘    │
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>└─────────┼──────────────────┼───────────────────────┼────────────────┘
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>          │                  │                       │
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>          ▼                  ▼                       ▼
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>┌──────────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>│                      Phase 1: 追踪 (Tracing)                        │
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>│                                                                      │
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>│  ┌─────────────────────────────────────────────────────────────┐    │
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>│  │  TorchDispatchMode + FakeTensorMode                          │    │
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>│  │                                                               │    │
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>│  │  (1) 将模型参数转换为 Fake CUDA 张量                          │    │
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>│  │  (2) 拦截每个 PyTorch 算子调用                                │    │
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>│  │  (3) 分类算子类型 (GEMM/ATTN/MATH/COLLECTIVE/...)            │    │
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>│  │  (4) 追踪数据依赖和 Stream 同步关系                           │    │
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>│  └───────────────────────────┬─────────────────────────────────┘    │
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>└──────────────────────────────┼──────────────────────────────────────┘
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>                               │
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>                               ▼
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>┌──────────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>│                   Phase 2: 性能估计 (Estimation)                     │
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>│                                                                      │
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>│  ┌────────────────────────┐    ┌────────────────────────────────┐   │
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>│  │   计算类算子             │    │   通信类算子                     │   │
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>│  │   (GEMM, ATTN, MATH)   │    │   (COLLECTIVE)                 │   │
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>│  │                         │    │                                │   │
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>│  │  ┌───────────────────┐ │    │  ┌──────────────────────────┐ │   │
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>│  │  │  Roofline 模型     │ │    │  │  集合通信算法分解          │ │   │
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>│  │  │  → T_roofline      │ │    │  │  → 点对点消息 DAG        │ │   │
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>│  │  └─────────┬─────────┘ │    │  └────────────┬─────────────┘ │   │
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>│  │            ▼            │    │               ▼                │   │
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a>│  │  ┌───────────────────┐ │    │  ┌──────────────────────────┐ │   │
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>│  │  │  ML 效率预测器     │ │    │  │  网络拓扑 + LogGP 模型    │ │   │
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>│  │  │  → η               │ │    │  │  → 链路-资源映射          │ │   │
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a>│  │  └─────────┬─────────┘ │    │  └────────────┬─────────────┘ │   │
+<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a>│  │            ▼            │    │               ▼                │   │
+<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>│  │  T = T_roofline / η    │    │  ┌──────────────────────────┐ │   │
+<a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a>│  │                         │    │  │  事件驱动模拟器            │ │   │
+<a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a>│  │                         │    │  │  → 带宽共享 + 拥塞建模    │ │   │
+<a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a>│  │                         │    │  │  → 通信耗时               │ │   │
+<a id="__codelineno-14-44" name="__codelineno-14-44" href="#__codelineno-14-44"></a>│  │                         │    │  └──────────────────────────┘ │   │
+<a id="__codelineno-14-45" name="__codelineno-14-45" href="#__codelineno-14-45"></a>│  └────────────┬───────────┘    └──────────────┬─────────────────┘   │
+<a id="__codelineno-14-46" name="__codelineno-14-46" href="#__codelineno-14-46"></a>└───────────────┼───────────────────────────────┼─────────────────────┘
+<a id="__codelineno-14-47" name="__codelineno-14-47" href="#__codelineno-14-47"></a>                │                               │
+<a id="__codelineno-14-48" name="__codelineno-14-48" href="#__codelineno-14-48"></a>                └───────────────┬───────────────┘
+<a id="__codelineno-14-49" name="__codelineno-14-49" href="#__codelineno-14-49"></a>                                ▼
+<a id="__codelineno-14-50" name="__codelineno-14-50" href="#__codelineno-14-50"></a>┌──────────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-14-51" name="__codelineno-14-51" href="#__codelineno-14-51"></a>│                    Phase 3: 分析 (Analysis)                          │
+<a id="__codelineno-14-52" name="__codelineno-14-52" href="#__codelineno-14-52"></a>│                                                                      │
+<a id="__codelineno-14-53" name="__codelineno-14-53" href="#__codelineno-14-53"></a>│  ┌─────────────────────────────────────────────────────────────┐    │
+<a id="__codelineno-14-54" name="__codelineno-14-54" href="#__codelineno-14-54"></a>│  │  算子图 (Operator Graph DAG)                                  │    │
+<a id="__codelineno-14-55" name="__codelineno-14-55" href="#__codelineno-14-55"></a>│  │                                                               │    │
+<a id="__codelineno-14-56" name="__codelineno-14-56" href="#__codelineno-14-56"></a>│  │  节点：算子 + 预估时间                                         │    │
+<a id="__codelineno-14-57" name="__codelineno-14-57" href="#__codelineno-14-57"></a>│  │  边：  数据依赖 + Stream 依赖                                  │    │
+<a id="__codelineno-14-58" name="__codelineno-14-58" href="#__codelineno-14-58"></a>│  │                                                               │    │
+<a id="__codelineno-14-59" name="__codelineno-14-59" href="#__codelineno-14-59"></a>│  │  → 关键路径算法（多 Stream 感知）                              │    │
+<a id="__codelineno-14-60" name="__codelineno-14-60" href="#__codelineno-14-60"></a>│  │  → 总执行时间估计                                              │    │
+<a id="__codelineno-14-61" name="__codelineno-14-61" href="#__codelineno-14-61"></a>│  │  → 瓶颈识别                                                    │    │
+<a id="__codelineno-14-62" name="__codelineno-14-62" href="#__codelineno-14-62"></a>│  └─────────────────────────────────────────────────────────────┘    │
+<a id="__codelineno-14-63" name="__codelineno-14-63" href="#__codelineno-14-63"></a>│                                                                      │
+<a id="__codelineno-14-64" name="__codelineno-14-64" href="#__codelineno-14-64"></a>│  输出：                                                              │
+<a id="__codelineno-14-65" name="__codelineno-14-65" href="#__codelineno-14-65"></a>│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────────┐   │
+<a id="__codelineno-14-66" name="__codelineno-14-66" href="#__codelineno-14-66"></a>│  │ 文本摘要  │  │ DOT 图   │  │ JSON     │  │ 关键路径时间(ms)  │   │
+<a id="__codelineno-14-67" name="__codelineno-14-67" href="#__codelineno-14-67"></a>│  └──────────┘  └──────────┘  └──────────┘  └──────────────────┘   │
+<a id="__codelineno-14-68" name="__codelineno-14-68" href="#__codelineno-14-68"></a>└──────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="102">10.2 代码结构<a class="headerlink" href="#102" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>syssim/
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>├── api.py                  # 公共 API (trace_model_for_training 等)
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>├── config.py               # 硬件配置 (HardwareInfo, SimulatorConfig)
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>├── operator_graph.py       # 算子图 IR (DAG, 关键路径, 7种算子类型)
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>├── tracer.py               # PyTorch 算子追踪 (TorchDispatchMode)
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>├── compute/                # 计算类算子的性能估计
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>│   ├── compute_cost_predictor.py   # Roofline 模型
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>│   ├── efficiency_models.py        # ML 效率模型 (MLP / XGBoost)
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>│   ├── compute_cost_profiler.py    # 性能分析器
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>│   └── flop_counter.py             # FLOP 计数注册表
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>└── network/                # 通信类算子的性能估计
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>    ├── collectives.py      # 8种集合通信算法
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>    ├── topology.py         # 5种网络拓扑
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>    ├── loggp.py            # LogGP 网络模型
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>    └── simulator.py        # 事件驱动网络模拟器
+</code></pre></div>
+<h3 id="103">10.3 适应新硬件<a class="headerlink" href="#103" title="Permanent link">&para;</a></h3>
+<p>SysSim 的一个重要设计目标是<strong>硬件可移植性</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>新硬件需要改什么？</th>
+<th>工作量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Roofline 模型</td>
+<td>只改硬件参数（Peak FLOP/s、带宽等）</td>
+<td>几分钟</td>
+</tr>
+<tr>
+<td>ML 效率预测器</td>
+<td>需要在目标硬件上重新分析（Profiling）并训练</td>
+<td>几分钟到几小时</td>
+</tr>
+<tr>
+<td>FLOP 计数</td>
+<td>无需改动</td>
+<td>零</td>
+</tr>
+<tr>
+<td>网络模拟器</td>
+<td>更新 LogGP 参数（通过微基准测试获取）</td>
+<td>几分钟</td>
+</tr>
+<tr>
+<td>追踪器</td>
+<td>无需改动</td>
+<td>零</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_3">术语表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>英文</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>算子</td>
+<td>Operator</td>
+<td>计算图中的一个基本操作（如矩阵乘法、ReLU）</td>
+</tr>
+<tr>
+<td>张量</td>
+<td>Tensor</td>
+<td>多维数组，深度学习中数据的基本载体</td>
+</tr>
+<tr>
+<td>FLOP</td>
+<td>Floating Point Operation</td>
+<td>一次浮点运算</td>
+</tr>
+<tr>
+<td>FLOP/s</td>
+<td>FLOPs per second</td>
+<td>每秒浮点运算次数（硬件性能指标）</td>
+</tr>
+<tr>
+<td>Roofline</td>
+<td>—</td>
+<td>基于硬件峰值的分析性能模型</td>
+</tr>
+<tr>
+<td>DAG</td>
+<td>Directed Acyclic Graph</td>
+<td>有向无环图</td>
+</tr>
+<tr>
+<td>AllReduce</td>
+<td>—</td>
+<td>集合通信操作：全部归约并分发</td>
+</tr>
+<tr>
+<td>NVLink</td>
+<td>—</td>
+<td>NVIDIA GPU 之间的高速互联技术</td>
+</tr>
+<tr>
+<td>LogGP</td>
+<td>—</td>
+<td>并行通信性能模型（L, o, g, G 四参数）</td>
+</tr>
+<tr>
+<td>Stream</td>
+<td>CUDA Stream</td>
+<td>GPU 上的任务队列</td>
+</tr>
+<tr>
+<td>张量并行</td>
+<td>Tensor Parallelism</td>
+<td>将单个算子切分到多块 GPU 上的并行策略</td>
+</tr>
+<tr>
+<td>数据并行</td>
+<td>Data Parallelism</td>
+<td>每块 GPU 持有完整模型、处理不同数据的并行策略</td>
+</tr>
+<tr>
+<td>效率因子</td>
+<td>Efficiency Factor (η)</td>
+<td>实际性能与理论峰值的比率</td>
+</tr>
+<tr>
+<td>关键路径</td>
+<td>Critical Path</td>
+<td>DAG 中决定总执行时间的最长路径</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
