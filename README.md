@@ -1,6 +1,6 @@
-# SysSim - LLM Performance Simulator
+# SysSim - Neural Network Performance Simulator
 
-**SysSim** that traces neural network execution to build a computational graph and estimate runtime using roofline models and ML-based efficiency prediction.
+**SysSim** traces neural network execution to build a computational graph and estimate runtime using roofline models and ML-based efficiency prediction. Supports LLM training/inference and diffusion model pipelines.
 
 For in-depth technical architecture, see [DESIGN.md](DESIGN.md) 
 
@@ -66,12 +66,15 @@ syssim/
 │   │   ├── simulator.py            # Network simulator
 │   │   └── topology.py             # Device topology
 │   └── integrations/
-│       └── huggingface.py          # HF Transformers training helpers
+│       ├── huggingface.py          # HF Transformers training helpers
+│       └── diffusers.py            # HF Diffusers pipeline helpers
 ├── examples/
 │   ├── trace_and_print.py          # Basic tracing (GEMM/ATTN/MATH)
 │   ├── configs/                    # Hardware mesh configs
 │   ├── huggingface/
 │   │   └── train_qwen3_8b_single.py    # Qwen3-8B, single GPU
+│   ├── diffusion/
+│   │   └── simulate_wan2_2.py          # Wan2.2 video diffusion
 │   └── megatron/
 │       └── train_gpt_multi_gpu.py      # GPT-3 1.3B, TP=4
 ├── tests/                          # Test suite
@@ -103,6 +106,14 @@ Traces a full Qwen3-8B training step (forward + backward) on a single GH200. Use
 
 ```bash
 python examples/huggingface/train_qwen3_8b_single.py
+```
+
+### Diffusion — Wan2.2 Video Generation
+
+Simulates a Wan2.2-1.3B video diffusion pipeline (DiT denoiser, 50 denoising steps with classifier-free guidance). Uses a simplified DiT model matching real architecture dimensions — no model weights or diffusers install required:
+
+```bash
+python examples/diffusion/simulate_wan2_2.py
 ```
 
 ### Megatron-Core — GPT-3 1.3B Tensor Parallel (TP=4)
