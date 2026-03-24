@@ -9,6 +9,7 @@ class ExecutionMode(Enum):
     TRAINING = "training"    # Forward + backward, standard shapes
     PREFILL = "prefill"      # Forward only, full sequence length
     DECODE = "decode"        # Forward only, seq_len=1, KV cache read
+    DIFFUSION_DENOISE = "diffusion_denoise"  # Single denoising step (forward only)
 
 
 @dataclass
@@ -208,6 +209,27 @@ def get_hardware_info() -> tuple[HardwareInfo, str]:
         f"Unknown hardware: {device_name}. "
         f"Please add hardware specs to get_hardware_info() in config.py"
     )
+
+
+@dataclass
+class DiffusionConfig:
+    """Configuration for diffusion model simulation.
+
+    Args:
+        num_inference_steps: Number of denoising steps (e.g. 20, 50).
+        guidance_scale: Classifier-free guidance scale. When > 1.0, the model
+            runs twice per step (conditional + unconditional), doubling denoise cost.
+        num_frames: Number of video frames (for video diffusion models like Wan2.2).
+            Set to 1 for image diffusion models.
+    """
+    num_inference_steps: int = 50
+    guidance_scale: float = 7.5
+    num_frames: int = 1
+
+    @property
+    def cfg_multiplier(self) -> int:
+        """Number of model forward passes per denoising step due to CFG."""
+        return 2 if self.guidance_scale > 1.0 else 1
 
 
 @dataclass

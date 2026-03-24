@@ -1,11 +1,23 @@
-from .config import ExecutionMode, HardwareInfo, SimulatorConfig, NetworkParams, get_hardware_info
+from .config import (
+    ExecutionMode, HardwareInfo, SimulatorConfig, NetworkParams,
+    DiffusionConfig, get_hardware_info,
+)
 from .operator_graph import OperatorType, OperatorNode, OperatorGraph, TensorMeta
-from .api import trace_model_for_training, trace_model_for_inference, set_efficiency_model_dir
+from .api import (
+    trace_model_for_training, trace_model_for_inference, set_efficiency_model_dir,
+    trace_diffusion_pipeline, DiffusionPipelineResult,
+)
 
 # Hugging Face integration (syssim.integrations.huggingface)
 from .integrations.huggingface import (
     trace_hf_model_for_training,
     trace_hf_training_step,
+)
+
+# Diffusers integration (syssim.integrations.diffusers)
+from .integrations.diffusers import (
+    trace_diffusers_pipeline,
+    build_wan2_2_inputs,
 )
 
 # Network simulator (syssim.network)
