@@ -2,7 +2,7 @@
 
 **SysSim** traces neural network execution to build a computational graph and estimate runtime using roofline models and ML-based efficiency prediction. Supports LLM training/inference and diffusion model pipelines.
 
-For in-depth technical architecture, see [DESIGN.md](DESIGN.md) 
+For in-depth technical architecture, see [DESIGN.md](DESIGN.md). For diffusion model support, see [DIFFUSION.md](DIFFUSION.md).
 
 ---
 
